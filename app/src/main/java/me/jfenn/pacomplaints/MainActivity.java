@@ -1,12 +1,12 @@
 package me.jfenn.pacomplaints;
 
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ValueCallback;
@@ -127,12 +127,32 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         complainter.getHtmlContentByName("ddSubject", 0, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
+                OptionData[] array;
                 if (value.length() > 2) {
                     List<OptionData> options = OptionData.fromHTML(value);
-                    complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, options.toArray(new OptionData[options.size()])));
+                    array = options.toArray(new OptionData[options.size()]);
                 } else {
-                    //TODO: error message
+                    array = new OptionData[]{
+                            new OptionData("ADA/Accessibility", "ADA/Accessibility Complaint"),
+                            new OptionData("Civil Rights/Title VI", "Civil Rights/Title VI Complaint"),
+                            new OptionData("Company", "Company Complaint"),
+                            new OptionData("Employee", "Employee Complaint"),
+                            new OptionData("Other", "Miscellaneous Complaint"),
+                            new OptionData("Service", "Service - General Complaint"),
+                            new OptionData("ServiceLateEarly", "Service - Late/Early"),
+                            new OptionData("ServiceNoShow", "Service - No Show"),
+                            new OptionData("ServiceOvercrowding", "Service - Overcrowding"),
+                            new OptionData("ServicePassup", "Service - Pass Up"),
+                            new OptionData("ServiceServiceRequested", "Service - Service Requested"),
+                            new OptionData("Website", "Website Complaint")
+                    };
+
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Scraping Error")
+                            .setMessage("The app has failed to scrape the complaint options from the website. Form editing may still work, but is not reliable.");
                 }
+
+                complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, array));
             }
         });
     }
