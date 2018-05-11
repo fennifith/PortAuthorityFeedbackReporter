@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.ValueCallback;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -82,7 +81,12 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
 
         complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Loading..."}));
 
-        ((ViewGroup) findViewById(R.id.ll)).addView(complainter.webView);
+        findViewById(R.id.review).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -1,9 +1,6 @@
 package me.jfenn.pacomplaints;
 
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
@@ -13,15 +10,12 @@ import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Complainter extends Application {
 
-    private static final String PREF_URL = "url";
-
     private static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
 
-    public WebView webView;
+    private WebView webView;
 
     private List<BlackboardListener> listeners;
     private List<ProgressListener> progressListeners;
