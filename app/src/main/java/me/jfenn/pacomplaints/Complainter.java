@@ -15,7 +15,7 @@ public class Complainter extends Application {
 
     private static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
 
-    private WebView webView;
+    public WebView webView;
 
     private List<BlackboardListener> listeners;
     private List<ProgressListener> progressListeners;

@@ -1,6 +1,7 @@
 package me.jfenn.pacomplaints;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -84,7 +85,14 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         findViewById(R.id.review).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prefs.edit()
+                        .putString(PREF_NAME_FIRST, firstName.getText().toString())
+                        .putString(PREF_NAME_LAST, lastName.getText().toString())
+                        .putString(PREF_PHONE, phone.getText().toString())
+                        .putString(PREF_EMAIL, email.getText().toString())
+                        .apply();
 
+                startActivity(new Intent(MainActivity.this, ReviewActivity.class));
             }
         });
     }
