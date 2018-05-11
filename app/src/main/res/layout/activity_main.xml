@@ -352,14 +352,14 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:tint="#FFF"
+                    android:tint="#000"
                     android:layout_margin="4dp"
                     app:srcCompat="@drawable/ic_done" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFF"
+                    android:textColor="#000"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_margin="4dp"
