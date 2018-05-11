@@ -1,6 +1,8 @@
 package me.jfenn.pacomplaints;
 
 import android.app.Application;
+import android.util.Log;
+import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
@@ -150,6 +152,18 @@ public class Complainter extends Application {
         webView.evaluateJavascript("(function(){return document.getElementsByName('" + name + "')[" + index + "]." + function + ";})();", callback);
     }
 
+    /**
+     * Calls a function of an element inside the WebView
+     *
+     * @param name     the class name of the element
+     * @param index    the index of the elements with the name
+     * @param function the function to call
+     * @param callback called once the action is completed
+     */
+    public void callFunctionByClassName(String name, int index, String function, ValueCallback<String> callback) {
+        webView.evaluateJavascript("(function(){return document.getElementsByClassName('" + name + "')[" + index + "]." + function + ";})();", callback);
+    }
+
     public void addListener(BlackboardListener listener) {
         listeners.add(listener);
     }
@@ -184,9 +198,17 @@ public class Complainter extends Application {
         }
     }
 
+    private void onAlert(String message) {
+        for (BlackboardListener listener : listeners) {
+            listener.onAlert(message);
+        }
+    }
+
     public interface BlackboardListener {
         void onPageFinished(String url);
         void onRequest(String url);
+
+        void onAlert(String message);
     }
 
     public interface ProgressListener {
@@ -231,6 +253,13 @@ public class Complainter extends Application {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             blackboard.onProgressChanged(newProgress);
+        }
+
+        @Override
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+            blackboard.onAlert(message);
+            Log.d("Alert", message);
+            return super.onJsAlert(view, url, message, result);
         }
     }
 }

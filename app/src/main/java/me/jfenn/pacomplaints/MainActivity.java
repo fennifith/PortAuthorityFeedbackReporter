@@ -182,6 +182,10 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
     }
 
     @Override
+    public void onAlert(String message) {
+    }
+
+    @Override
     protected void onDestroy() {
         complainter.removeListener(this);
         super.onDestroy();
