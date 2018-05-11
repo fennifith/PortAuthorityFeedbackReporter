@@ -1,5 +1,6 @@
 package me.jfenn.pacomplaints;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -149,7 +150,14 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
 
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("Scraping Error")
-                            .setMessage("The app has failed to scrape the complaint options from the website. Form editing may still work, but is not reliable.");
+                            .setMessage("The app has failed to scrape the complaint options from the website. Form editing may still work, but is not reliable.")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
 
                 complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, array));
