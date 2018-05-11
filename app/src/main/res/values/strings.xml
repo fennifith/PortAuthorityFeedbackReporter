@@ -14,4 +14,6 @@
     <string name="title_full">Port Authority Complaint Reporter</string>
     <string name="title_review"><![CDATA[Review & Submit]]></string>
     <string name="title_submit">Submit</string>
+    <string name="title_submit_confirm">Submit Complaint?</string>
+    <string name="msg_submit_confirm">Are you sure that you want to submit the complaint? This cannot be undone.</string>
 </resources>
