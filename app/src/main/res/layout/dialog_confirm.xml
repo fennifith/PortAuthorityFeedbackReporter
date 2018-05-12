@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
     android:background="#FFF"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="64dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:gravity="center_vertical"
         android:text="@string/title_submit_confirm"
         android:textColor="#000"
@@ -21,6 +23,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/msg_submit_confirm"
@@ -28,9 +32,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:gravity="center_vertical|end"
         android:orientation="horizontal">
 
@@ -39,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@android:string/cancel"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:textColor="#000"
@@ -53,8 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/title_submit"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:gravity="center"
             android:background="?attr/selectableItemBackground"
             android:textColor="#000"
