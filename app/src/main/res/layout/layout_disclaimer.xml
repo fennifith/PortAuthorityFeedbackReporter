@@ -20,7 +20,7 @@
         android:paddingBottom="4dp"
         android:gravity="center_vertical"
         android:text="@string/title_disclaimer"
-        android:textColor="#000"
+        android:textColor="@color/textColorPrimary"
         android:textSize="20sp"
         android:layout_gravity="center_vertical" />
 
@@ -32,7 +32,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/msg_disclaimer"
-        android:textColor="#B3000000" />
+        android:textColor="@color/textColorSecondary" />
 
     <TextView
         android:id="@+id/about"
@@ -44,7 +44,7 @@
         android:layout_gravity="end"
         android:gravity="center"
         android:background="?attr/selectableItemBackground"
-        android:textColor="#000"
+        android:textColor="@color/textColorPrimary"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textAllCaps="true" />

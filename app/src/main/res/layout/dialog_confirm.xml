@@ -16,7 +16,7 @@
         android:paddingBottom="8dp"
         android:gravity="center_vertical"
         android:text="@string/title_submit_confirm"
-        android:textColor="#000"
+        android:textColor="@color/textColorPrimary"
         android:textSize="20sp"
         android:layout_gravity="center_vertical" />
 
@@ -28,7 +28,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/msg_submit_confirm"
-        android:textColor="#B3000000" />
+        android:textColor="@color/textColorSecondary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             android:paddingRight="12dp"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:textColor="#000"
+            android:textColor="@color/textColorPrimary"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textAllCaps="true" />
@@ -62,7 +62,7 @@
             android:paddingRight="12dp"
             android:gravity="center"
             android:background="?attr/selectableItemBackground"
-            android:textColor="#000"
+            android:textColor="@color/textColorPrimary"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textAllCaps="true" />

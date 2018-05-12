@@ -23,7 +23,7 @@
                 android:gravity="center"
                 android:padding="22dp"
                 android:text="@string/title_review"
-                android:textColor="#000"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
