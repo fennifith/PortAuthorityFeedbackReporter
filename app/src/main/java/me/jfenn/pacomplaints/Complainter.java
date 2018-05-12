@@ -27,7 +27,7 @@ public class Complainter extends Application {
         super.onCreate();
         listeners = new ArrayList<>();
         progressListeners = new ArrayList<>();
-        webView = new WebView(this);
+        webView = new RestrictedWebView(this);
         webView.setWebViewClient(new WebClient(this));
         webView.setWebChromeClient(new ChromeClient(this));
         WebSettings webSettings = webView.getSettings();
