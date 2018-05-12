@@ -3,14 +3,20 @@
     <appInfo
         description="A small application to make it easier for riders to report issues with the Pittsburgh Port Authority bus system."
         repo="TheAndroidMaster/PortAuthorityComplaintReporter"
-        websiteUrl="https://jfenn.me/about/?PortAuthorityComplaintReporter" />
+        websiteUrl="https://jfenn.me/about/?PortAuthorityComplaintReporter"
+        gitHubUrl="^https://jfenn.me/redirects/?t=github&amp;d=PortAuthorityComplaintReporter" />
     <contributors repo="TheAndroidMaster/PortAuthorityComplaintReporter">
         <contributor
             name="James Fenn"
             avatar="https://avatars1.githubusercontent.com/u/13000407?v=4"
             bio="Android developer and co-founder of @DoubleDotLabs. Writes Java, C, and HTML. PHP confuses me."
             blog="https://jfenn.me/"
-            login="TheAndroidMaster" />
+            login="TheAndroidMaster"
+            task="^Developer"
+            email="dev@jfenn.me" />
+        <link
+            id="gitHub"
+            url="^https://jfenn.me/redirects/?t=github" />
     </contributors>
     <licenses>
         <project
