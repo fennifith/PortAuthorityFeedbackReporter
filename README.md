@@ -2,4 +2,4 @@ The Port Authority Complaint Reporter, sometimes called "Port Authority Complain
 
 |Input|Input|Preview|About (using [Attribouter](https://jfenn.me/about/?Attribouter)|
 |-----|-----|-----|-----|
-|![img](https://jfenn.me/images/screenshots/PAComplainter-Input.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-Input2.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-Preview.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-About.png)|
+|![img](https://jfenn.me/images/screenshots/PAComplainter-Input.png?s=1)|![img](https://jfenn.me/images/screenshots/PAComplainter-Input2.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-Preview.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-About.png)|
