@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         direction.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Inbound", "Outbound", "Not Applicable"}));
         direction.setSelection(now.after(noon) ? 1 : 0);
 
-        date.setText(new SimpleDateFormat("MM/dd/YY", Locale.getDefault()).format(now.getTime()));
+        date.setText(new SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(now.getTime()));
         time.setText(new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(now.getTime()));
 
         complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Loading..."}));
