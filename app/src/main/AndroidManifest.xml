@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="me.jfenn.pacomplaints">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +22,12 @@
         </activity>
 
         <activity android:name=".ReviewActivity" />
+
+        <activity
+            tools:replace="android:theme"
+            android:name="me.jfenn.attribouter.activities.AboutActivity"
+            android:theme="@style/AttribouterTheme.Light" />
+
     </application>
 
 </manifest>
