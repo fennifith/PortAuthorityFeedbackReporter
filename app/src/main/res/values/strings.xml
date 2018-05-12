@@ -16,4 +16,7 @@
     <string name="title_submit">Submit</string>
     <string name="title_submit_confirm">Submit Complaint?</string>
     <string name="msg_submit_confirm">Are you sure that you want to submit the complaint? This cannot be undone.</string>
+    <string name="title_disclaimer">Disclaimer</string>
+    <string name="msg_disclaimer">This app is not created nor endorsed by the Port Authority of Allegheny County. It is an open source product created by a user of the bus system to allow for easier reporting of issues on mobile devices.</string>
+    <string name="title_about_oss"><![CDATA[About & Open Source Licenses]]></string>
 </resources>

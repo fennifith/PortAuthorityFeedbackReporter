@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import me.jfenn.attribouter.Attribouter;
+
 public class MainActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 
     private static final String PREF_NAME_FIRST = "firstName";
@@ -93,6 +95,13 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                         .apply();
 
                 startActivity(new Intent(MainActivity.this, ReviewActivity.class));
+            }
+        });
+
+        findViewById(R.id.about).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Attribouter.from(MainActivity.this).show();
             }
         });
     }
