@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:inputType="textPersonName"
+                        android:inputType="textPersonName|textCapWords"
                         android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -67,7 +67,7 @@
                         android:id="@+id/lastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
+                        android:inputType="textPersonName|textCapWords"
                         android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -188,6 +188,8 @@
                         android:id="@+id/route"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -202,6 +204,8 @@
                         android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
