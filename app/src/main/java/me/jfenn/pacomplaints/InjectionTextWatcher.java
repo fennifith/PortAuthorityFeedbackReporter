@@ -4,14 +4,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-public class ScrapedValueTextWatcher implements TextWatcher {
+public class InjectionTextWatcher implements TextWatcher {
 
     private EditText editText;
     private String id;
     private String name;
     private int index;
 
-    public ScrapedValueTextWatcher(EditText editText, String id) {
+    public InjectionTextWatcher(EditText editText, String id) {
         this.editText = editText;
         this.id = id;
 
@@ -19,7 +19,7 @@ public class ScrapedValueTextWatcher implements TextWatcher {
         onTextChanged("", 0, 0, 0);
     }
 
-    public ScrapedValueTextWatcher(EditText editText, String name, int index) {
+    public InjectionTextWatcher(EditText editText, String name, int index) {
         this.editText = editText;
         this.name = name;
         this.index = index;

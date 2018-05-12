@@ -99,17 +99,17 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
 
     @Override
     public void onPageFinished(String url) {
-        new ScrapedValueTextWatcher(firstName, "firstname");
-        new ScrapedValueTextWatcher(lastName, "lastname");
-        new ScrapedValueTextWatcher(phone, "homephone");
-        new ScrapedValueTextWatcher(email, "email");
-        new ScrapedValueTextWatcher(route, "routenum");
-        new ScrapedValueTextWatcher(date, "incident_date");
-        new ScrapedValueTextWatcher(time, "boardtime");
-        new ScrapedValueTextWatcher(location, "boardloc");
-        new ScrapedValueTextWatcher(vehicle, "busnumber");
-        new ScrapedValueTextWatcher(operator, "opnumber");
-        new ScrapedValueTextWatcher(description, "txaMessage", 0);
+        new InjectionTextWatcher(firstName, "firstname");
+        new InjectionTextWatcher(lastName, "lastname");
+        new InjectionTextWatcher(phone, "homephone");
+        new InjectionTextWatcher(email, "email");
+        new InjectionTextWatcher(route, "routenum");
+        new InjectionTextWatcher(date, "incident_date");
+        new InjectionTextWatcher(time, "boardtime");
+        new InjectionTextWatcher(location, "boardloc");
+        new InjectionTextWatcher(vehicle, "busnumber");
+        new InjectionTextWatcher(operator, "opnumber");
+        new InjectionTextWatcher(description, "txaMessage", 0);
 
         AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
             @Override
