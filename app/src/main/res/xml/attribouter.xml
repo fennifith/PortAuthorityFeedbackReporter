@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<about>
+    <appInfo
+        description="A small application to make it easier for riders to report issues with the Pittsburgh Port Authority bus system."
+        repo="TheAndroidMaster/PortAuthorityComplaintReporter"
+        websiteUrl="https://jfenn.me/about/?PortAuthorityComplaintReporter" />
+    <contributors repo="TheAndroidMaster/PortAuthorityComplaintReporter">
+        <contributor
+            name="James Fenn"
+            avatar="https://avatars1.githubusercontent.com/u/13000407?v=4"
+            bio="Android developer and co-founder of @DoubleDotLabs. Writes Java, C, and HTML. PHP confuses me."
+            blog="https://jfenn.me/"
+            login="TheAndroidMaster" />
+    </contributors>
+    <licenses>
+        <project
+            description="jsoup: Java HTML Parser, with best of DOM, CSS, and jquery"
+            license="mit"
+            licenseName="MIT License"
+            repo="jhy/jsoup"
+            title="Jsoup"
+            website="https://jsoup.org/" />
+        <project
+            description="A lightweight 'about screen' library to allow quick but customizable attribution in Android apps."
+            license="apache-2.0"
+            licenseName="Apache License 2.0"
+            repo="TheAndroidMaster/Attribouter"
+            title="Attribouter"
+            website="https://bintray.com/18jafenn90/maven/attribouter" />
+    </licenses>
+</about>
