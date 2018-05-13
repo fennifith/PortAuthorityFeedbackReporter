@@ -11,10 +11,13 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +29,7 @@ import me.jfenn.pacomplaints.Complainter;
 import me.jfenn.pacomplaints.R;
 import me.jfenn.pacomplaints.data.OptionData;
 import me.jfenn.pacomplaints.listeners.InjectionTextWatcher;
+import me.jfenn.pacomplaints.listeners.NoKeyboardFocusListener;
 import me.jfenn.pacomplaints.listeners.NoKeyboardTouchListener;
 
 public class MainActivity extends AppCompatActivity implements Complainter.BlackboardListener {
@@ -87,22 +91,53 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         direction.setSelection(now.after(noon) ? 1 : 0);
 
         date.setText(new SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(now.getTime()));
+        date.setTag(now);
         date.setOnTouchListener(new NoKeyboardTouchListener());
+        date.setOnFocusChangeListener(new NoKeyboardFocusListener());
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(v.getContext())
-                        .show();
+                Calendar calendar = Calendar.getInstance();
+                if (v.getTag() != null && v.getTag() instanceof Calendar)
+                    calendar = (Calendar) v.getTag();
+
+                new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        date.setText(new SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(calendar.getTime()));
+                        date.setTag(calendar);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
         time.setText(new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(now.getTime()));
+        time.setTag(now);
         time.setOnTouchListener(new NoKeyboardTouchListener());
+        time.setOnFocusChangeListener(new NoKeyboardFocusListener());
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog.Builder(v.getContext())
-                        .show();
+                Calendar calendar = Calendar.getInstance();
+                if (v.getTag() != null && v.getTag() instanceof Calendar)
+                    calendar = (Calendar) v.getTag();
+
+                new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
+
+                        time.setText(new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(calendar.getTime()));
+                        time.setTag(calendar);
+                    }
+                }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(v.getContext())).show();
             }
         });
 
