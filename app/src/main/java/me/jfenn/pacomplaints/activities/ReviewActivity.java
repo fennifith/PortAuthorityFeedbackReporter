@@ -1,4 +1,4 @@
-package me.jfenn.pacomplaints;
+package me.jfenn.pacomplaints.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ValueCallback;
 import android.widget.Toast;
+
+import me.jfenn.pacomplaints.Complainter;
+import me.jfenn.pacomplaints.R;
 
 public class ReviewActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 

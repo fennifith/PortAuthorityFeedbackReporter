@@ -1,4 +1,4 @@
-package me.jfenn.pacomplaints;
+package me.jfenn.pacomplaints.views;
 
 import android.content.Context;
 import android.view.MotionEvent;

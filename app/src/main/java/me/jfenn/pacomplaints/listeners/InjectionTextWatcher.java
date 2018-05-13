@@ -1,8 +1,10 @@
-package me.jfenn.pacomplaints;
+package me.jfenn.pacomplaints.listeners;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import me.jfenn.pacomplaints.Complainter;
 
 public class InjectionTextWatcher implements TextWatcher {
 
@@ -36,7 +38,8 @@ public class InjectionTextWatcher implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (id != null)
             ((Complainter) editText.getContext().getApplicationContext()).setAttribute(id, "value", "\"" + editText.getText().toString() + "\"");
-        else ((Complainter) editText.getContext().getApplicationContext()).setAttributeByName(name, index, "innerText", "\"" + editText.getText().toString() + "\"");
+        else
+            ((Complainter) editText.getContext().getApplicationContext()).setAttributeByName(name, index, "innerText", "\"" + editText.getText().toString() + "\"");
     }
 
     @Override

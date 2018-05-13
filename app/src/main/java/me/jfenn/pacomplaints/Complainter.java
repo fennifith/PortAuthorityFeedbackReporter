@@ -13,6 +13,8 @@ import android.webkit.WebViewClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.jfenn.pacomplaints.views.RestrictedWebView;
+
 public class Complainter extends Application {
 
     private static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";

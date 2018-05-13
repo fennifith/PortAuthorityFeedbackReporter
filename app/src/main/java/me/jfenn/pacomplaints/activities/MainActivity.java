@@ -1,5 +1,7 @@
-package me.jfenn.pacomplaints;
+package me.jfenn.pacomplaints.activities;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +22,11 @@ import java.util.List;
 import java.util.Locale;
 
 import me.jfenn.attribouter.Attribouter;
+import me.jfenn.pacomplaints.Complainter;
+import me.jfenn.pacomplaints.R;
+import me.jfenn.pacomplaints.data.OptionData;
+import me.jfenn.pacomplaints.listeners.InjectionTextWatcher;
+import me.jfenn.pacomplaints.listeners.NoKeyboardTouchListener;
 
 public class MainActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 
@@ -80,7 +87,24 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         direction.setSelection(now.after(noon) ? 1 : 0);
 
         date.setText(new SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(now.getTime()));
+        date.setOnTouchListener(new NoKeyboardTouchListener());
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(v.getContext())
+                        .show();
+            }
+        });
+
         time.setText(new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(now.getTime()));
+        time.setOnTouchListener(new NoKeyboardTouchListener());
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TimePickerDialog.Builder(v.getContext())
+                        .show();
+            }
+        });
 
         complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Loading..."}));
 
