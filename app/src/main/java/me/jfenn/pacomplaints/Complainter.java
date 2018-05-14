@@ -19,7 +19,7 @@ public class Complainter extends Application {
 
     public static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
     public static final String CONFIRM_URL = "http://www.portauthority.org/paac/apps/webcomments/pgConfirm.asp?form=concern";
-    public static final String DONE_URL = "";
+    public static final String DONE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgComment.asp?t=thankyou";
 
     public WebView webView;
 

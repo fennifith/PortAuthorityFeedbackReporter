@@ -17,7 +17,6 @@ import me.jfenn.pacomplaints.views.ProgressLineView;
 
 public class ReviewActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 
-    private boolean isSubmitted;
     private Complainter complainter;
     private ViewGroup main;
 
@@ -43,8 +42,6 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
         findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSubmitted = true;
-
                 final BottomSheetDialog dialog = new BottomSheetDialog(v.getContext());
                 View content = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_confirm, null);
 
@@ -76,12 +73,6 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
                 });
 
                 dialog.setContentView(content);
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        isSubmitted = false;
-                    }
-                });
                 dialog.show();
             }
         });
@@ -132,6 +123,8 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
                         }
                     })
                     .show();
+        } else if (!url.equals(Complainter.BASE_URL) && !url.equals(Complainter.CONFIRM_URL)) {
+            error("URL not recognized.");
         }
     }
 
@@ -149,8 +142,8 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     private void error(String message) {
         new AlertDialog.Builder(this)
-                .setTitle("Unknown Error")
-                .setMessage("Something has gone wrong while attempting to interact with the form. This usually signifies that part of the form has been updated and that the app may no longer be compatible with it. \n\nError message: " + message)
+                .setTitle(R.string.title_unknown_error)
+                .setMessage(getString(R.string.msg_unknown_error) + message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
