@@ -113,13 +113,18 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
         if (url.equals(Complainter.DONE_URL)) {
             new AlertDialog.Builder(this)
-                    .setCancelable(false)
                     .setTitle("Form Submitted")
-                    .setMessage("The form has been submitted successfully. Press \'ok\' to close this app.")
+                    .setMessage("The form has been submitted successfully. Press \'ok\' to close this page and reset all fields.")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            System.exit(0);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            finish();
                         }
                     })
                     .show();

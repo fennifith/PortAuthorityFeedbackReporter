@@ -207,6 +207,14 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                 }
             });
         } else if (!complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
+            if (complainter.webView.getUrl().equals(Complainter.DONE_URL)) {
+                route.setText("");
+                location.setText("");
+                vehicle.setText("");
+                operator.setText("");
+                description.setText("");
+            }
+
             complainter.webView.loadUrl(Complainter.BASE_URL);
             if (progressView != null)
                 progressView.animate().alpha(1).start();
