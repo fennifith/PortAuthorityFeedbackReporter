@@ -141,7 +141,20 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
             }
         });
 
-        complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Loading..."}));
+        complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new OptionData[]{
+                new OptionData("ADA/Accessibility", "ADA/Accessibility Complaint"),
+                new OptionData("Civil Rights/Title VI", "Civil Rights/Title VI Complaint"),
+                new OptionData("Company", "Company Complaint"),
+                new OptionData("Employee", "Employee Complaint"),
+                new OptionData("Other", "Miscellaneous Complaint"),
+                new OptionData("Service", "Service - General Complaint"),
+                new OptionData("ServiceLateEarly", "Service - Late/Early"),
+                new OptionData("ServiceNoShow", "Service - No Show"),
+                new OptionData("ServiceOvercrowding", "Service - Overcrowding"),
+                new OptionData("ServicePassup", "Service - Pass Up"),
+                new OptionData("ServiceServiceRequested", "Service - Service Requested"),
+                new OptionData("Website", "Website Complaint")
+        }));
 
         findViewById(R.id.review).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +176,9 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                 Attribouter.from(MainActivity.this).show();
             }
         });
+
+        if (!complainter.isLoading())
+            onPageFinished(null);
     }
 
     @Override
@@ -202,32 +218,17 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         };
 
         complaint.setOnItemSelectedListener(listener);
+        listener.onItemSelected(complaint, null, complaint.getSelectedItemPosition(), 0);
         direction.setOnItemSelectedListener(listener);
         listener.onItemSelected(direction, null, direction.getSelectedItemPosition(), 0);
 
         complainter.getHtmlContentByName("ddSubject", 0, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
-                OptionData[] array;
                 if (value.length() > 2) {
                     List<OptionData> options = OptionData.fromHTML(value);
-                    array = options.toArray(new OptionData[options.size()]);
+                    complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, options.toArray(new OptionData[options.size()])));
                 } else {
-                    array = new OptionData[]{
-                            new OptionData("ADA/Accessibility", "ADA/Accessibility Complaint"),
-                            new OptionData("Civil Rights/Title VI", "Civil Rights/Title VI Complaint"),
-                            new OptionData("Company", "Company Complaint"),
-                            new OptionData("Employee", "Employee Complaint"),
-                            new OptionData("Other", "Miscellaneous Complaint"),
-                            new OptionData("Service", "Service - General Complaint"),
-                            new OptionData("ServiceLateEarly", "Service - Late/Early"),
-                            new OptionData("ServiceNoShow", "Service - No Show"),
-                            new OptionData("ServiceOvercrowding", "Service - Overcrowding"),
-                            new OptionData("ServicePassup", "Service - Pass Up"),
-                            new OptionData("ServiceServiceRequested", "Service - Service Requested"),
-                            new OptionData("Website", "Website Complaint")
-                    };
-
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("Scraping Error")
                             .setMessage("The app has failed to scrape the complaint options from the website. Form editing may still work, but is not reliable.")
@@ -239,8 +240,6 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                             })
                             .show();
                 }
-
-                complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, array));
             }
         });
     }

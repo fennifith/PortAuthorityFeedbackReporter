@@ -24,6 +24,8 @@ public class Complainter extends Application {
     private List<BlackboardListener> listeners;
     private List<ProgressListener> progressListeners;
 
+    private boolean isLoading;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,6 +39,7 @@ public class Complainter extends Application {
         webSettings.setLoadsImagesAutomatically(false);
         webSettings.setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
         webView.loadUrl(BASE_URL);
+        isLoading = true;
     }
 
     /**
@@ -175,6 +178,7 @@ public class Complainter extends Application {
     }
 
     private void onPageFinished(String url) {
+        isLoading = false;
         for (BlackboardListener listener : listeners) {
             listener.onPageFinished(url);
         }
@@ -186,6 +190,10 @@ public class Complainter extends Application {
         }
     }
 
+    public boolean isLoading() {
+        return isLoading;
+    }
+
     public void addListener(ProgressListener listener) {
         progressListeners.add(listener);
     }
@@ -195,6 +203,7 @@ public class Complainter extends Application {
     }
 
     private void onProgressChanged(int progress) {
+        isLoading = true;
         for (ProgressListener listener : progressListeners) {
             listener.onProgressChanged(progress);
         }
