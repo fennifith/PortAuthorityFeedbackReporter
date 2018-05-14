@@ -90,6 +90,10 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
     }
 
     @Override
+    public void onProgressChanged(int progress) {
+    }
+
+    @Override
     public void onAlert(String message) {
         if (isSubmitted) {
             new AlertDialog.Builder(this)

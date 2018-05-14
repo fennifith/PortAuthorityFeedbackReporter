@@ -31,6 +31,7 @@ import me.jfenn.pacomplaints.data.OptionData;
 import me.jfenn.pacomplaints.listeners.InjectionTextWatcher;
 import me.jfenn.pacomplaints.listeners.NoKeyboardFocusListener;
 import me.jfenn.pacomplaints.listeners.NoKeyboardTouchListener;
+import me.jfenn.pacomplaints.views.ProgressLineView;
 
 public class MainActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
     private TextInputEditText vehicle;
     private TextInputEditText operator;
     private TextInputEditText description;
+    private ProgressLineView progressView;
 
     private Complainter complainter;
     private SharedPreferences prefs;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         vehicle = findViewById(R.id.vehicle);
         operator = findViewById(R.id.operator);
         description = findViewById(R.id.description);
+        progressView = findViewById(R.id.progress);
 
         firstName.setText(prefs.getString(PREF_NAME_FIRST, ""));
         lastName.setText(prefs.getString(PREF_NAME_LAST, ""));
@@ -177,12 +180,16 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
             }
         });
 
-        if (!complainter.isLoading())
+        if (!complainter.isLoading()) {
             onPageFinished(null);
+            progressView.setAlpha(0);
+        }
     }
 
     @Override
     public void onPageFinished(String url) {
+        progressView.animate().alpha(0).start();
+
         new InjectionTextWatcher(firstName, "firstname");
         new InjectionTextWatcher(lastName, "lastname");
         new InjectionTextWatcher(phone, "homephone");
@@ -246,6 +253,11 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
 
     @Override
     public void onRequest(String url) {
+    }
+
+    @Override
+    public void onProgressChanged(int progress) {
+        progressView.update((float) progress / 100);
     }
 
     @Override

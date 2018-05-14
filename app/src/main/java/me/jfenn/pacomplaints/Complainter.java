@@ -22,7 +22,6 @@ public class Complainter extends Application {
     public WebView webView;
 
     private List<BlackboardListener> listeners;
-    private List<ProgressListener> progressListeners;
 
     private boolean isLoading;
 
@@ -30,7 +29,6 @@ public class Complainter extends Application {
     public void onCreate() {
         super.onCreate();
         listeners = new ArrayList<>();
-        progressListeners = new ArrayList<>();
         webView = new RestrictedWebView(this);
         webView.setWebViewClient(new WebClient(this));
         webView.setWebChromeClient(new ChromeClient(this));
@@ -194,17 +192,9 @@ public class Complainter extends Application {
         return isLoading;
     }
 
-    public void addListener(ProgressListener listener) {
-        progressListeners.add(listener);
-    }
-
-    public void removeListener(ProgressListener listener) {
-        progressListeners.remove(listener);
-    }
-
     private void onProgressChanged(int progress) {
         isLoading = true;
-        for (ProgressListener listener : progressListeners) {
+        for (BlackboardListener listener : listeners) {
             listener.onProgressChanged(progress);
         }
     }
@@ -219,11 +209,8 @@ public class Complainter extends Application {
         void onPageFinished(String url);
         void onRequest(String url);
 
-        void onAlert(String message);
-    }
-
-    public interface ProgressListener {
         void onProgressChanged(int progress);
+        void onAlert(String message);
     }
 
     private static class WebClient extends WebViewClient {
