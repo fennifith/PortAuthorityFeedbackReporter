@@ -7,53 +7,52 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="#30000000" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingBottom="4dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
-        android:paddingBottom="4dp"
-        android:gravity="center_vertical"
         android:text="@string/title_disclaimer"
         android:textColor="@color/textColorPrimary"
-        android:textSize="20sp"
-        android:layout_gravity="center_vertical" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:paddingTop="4dp"
         android:text="@string/msg_disclaimer"
         android:textColor="@color/textColorSecondary" />
 
     <TextView
         android:id="@+id/about"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:text="@string/title_about_oss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="12dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:layout_gravity="end"
-        android:gravity="center"
-        android:background="?attr/selectableItemBackground"
+        android:paddingTop="12dp"
+        android:text="@string/title_about_oss"
+        android:textAllCaps="true"
         android:textColor="@color/textColorPrimary"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:textAllCaps="true" />
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="#30000000" />
 
 </LinearLayout>
