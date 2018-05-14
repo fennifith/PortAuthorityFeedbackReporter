@@ -180,9 +180,36 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
             }
         });
 
-        if (!complainter.isLoading()) {
+        if (!complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
+            complainter.webView.loadUrl(Complainter.BASE_URL);
+        } else if (!complainter.isLoading()) {
             onPageFinished(null);
             progressView.setAlpha(0);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (complainter.webView.getUrl().equals(Complainter.CONFIRM_URL)) {
+            complainter.getAttributeByClassName("Button", 0, "value", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+                    if (value.contains("Changes")) {
+                        complainter.callFunctionByClassName("Button", 0, "click()", new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String value) {
+                            }
+                        });
+                    } else {
+                        error("Backwards navigation changes button not found.");
+                    }
+                }
+            });
+        } else if (!complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
+            complainter.webView.loadUrl(Complainter.BASE_URL);
+            if (progressView != null)
+                progressView.animate().alpha(1).start();
         }
     }
 
@@ -251,12 +278,28 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         });
     }
 
+    private void error(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("Unknown Error")
+                .setMessage("Something has gone wrong while attempting to interact with the form. This usually signifies that part of the form has been updated and that the app may no longer be compatible with it. \n\nError message: " + message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
     @Override
     public void onRequest(String url) {
     }
 
     @Override
     public void onProgressChanged(int progress) {
+        if (progressView.getAlpha() == 0)
+            progressView.animate().alpha(1).start();
+
         progressView.update((float) progress / 100);
     }
 

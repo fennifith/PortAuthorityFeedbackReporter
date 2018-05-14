@@ -51,10 +51,18 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
                 content.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        complainter.callFunctionByClassName("Button", 0, "click()", new ValueCallback<String>() {
+                        complainter.getAttributeByClassName("Button", 1, "value", new ValueCallback<String>() {
                             @Override
                             public void onReceiveValue(String value) {
-                                dialog.dismiss();
+                                if (value.contains("Submit")) {
+                                    complainter.callFunctionByClassName("Button", 1, "click()", new ValueCallback<String>() {
+                                        @Override
+                                        public void onReceiveValue(String value) {
+                                        }
+                                    });
+                                } else {
+                                    error("Second submit button not found.");
+                                }
                             }
                         });
                     }
@@ -70,6 +78,23 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
                 dialog.show();
             }
         });
+
+        if (complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
+            complainter.getAttributeByClassName("Button", 0, "value", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+                    if (value.contains("Submit")) {
+                        complainter.callFunctionByClassName("Button", 0, "click()", new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String value) {
+                            }
+                        });
+                    } else {
+                        error("First submit button not found.");
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -83,6 +108,19 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     @Override
     public void onPageFinished(String url) {
+        if (url.equals(Complainter.DONE_URL)) {
+            new AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setTitle("Form Submitted")
+                    .setMessage("The form has been submitted successfully. Press \'ok\' to close this app.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    })
+                    .show();
+        }
     }
 
     @Override
@@ -91,6 +129,19 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     @Override
     public void onProgressChanged(int progress) {
+    }
+
+    private void error(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("Unknown Error")
+                .setMessage("Something has gone wrong while attempting to interact with the form. This usually signifies that part of the form has been updated and that the app may no longer be compatible with it. \n\nError message: " + message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @Override

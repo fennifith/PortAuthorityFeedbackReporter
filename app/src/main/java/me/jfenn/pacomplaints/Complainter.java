@@ -17,7 +17,9 @@ import me.jfenn.pacomplaints.views.RestrictedWebView;
 
 public class Complainter extends Application {
 
-    private static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
+    public static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
+    public static final String CONFIRM_URL = "http://www.portauthority.org/paac/apps/webcomments/pgConfirm.asp?form=concern";
+    public static final String DONE_URL = "";
 
     public WebView webView;
 
@@ -123,6 +125,18 @@ public class Complainter extends Application {
      */
     public void getAttribute(String id, String attribute, ValueCallback<String> callback) {
         webView.evaluateJavascript("(function(){return document.getElementById('" + id + "')." + attribute + ";})()", callback);
+    }
+
+    /**
+     * Gets an attribute of an element in the WebView, formatted as JSON
+     *
+     * @param name      the class name of the element
+     * @param index     the index of the element in the page
+     * @param attribute the attribute to obtain
+     * @param callback  called once the action is completed
+     */
+    public void getAttributeByClassName(String name, int index, String attribute, ValueCallback<String> callback) {
+        webView.evaluateJavascript("(function(){return document.getElementsByClassName('" + name + "')[" + index + "]." + attribute + ";})()", callback);
     }
 
     /**
