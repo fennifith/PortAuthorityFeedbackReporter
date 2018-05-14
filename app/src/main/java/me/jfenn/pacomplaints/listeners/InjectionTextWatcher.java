@@ -39,7 +39,7 @@ public class InjectionTextWatcher implements TextWatcher {
         if (id != null)
             ((Complainter) editText.getContext().getApplicationContext()).setAttribute(id, "value", "\"" + editText.getText().toString() + "\"");
         else
-            ((Complainter) editText.getContext().getApplicationContext()).setAttributeByName(name, index, "innerText", "\"" + editText.getText().toString() + "\"");
+            ((Complainter) editText.getContext().getApplicationContext()).setAttributeByName(name, index, "value", "\"" + editText.getText().toString() + "\"");
     }
 
     @Override
