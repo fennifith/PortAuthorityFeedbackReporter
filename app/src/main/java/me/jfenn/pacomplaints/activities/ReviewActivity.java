@@ -10,16 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ValueCallback;
-import android.widget.Toast;
 
 import me.jfenn.pacomplaints.Complainter;
 import me.jfenn.pacomplaints.R;
+import me.jfenn.pacomplaints.views.ProgressLineView;
 
 public class ReviewActivity extends AppCompatActivity implements Complainter.BlackboardListener {
 
     private boolean isSubmitted;
     private Complainter complainter;
     private ViewGroup main;
+
+    private ProgressLineView progressView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +31,11 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
         complainter.addListener(this);
 
         main = findViewById(R.id.main);
+        progressView = findViewById(R.id.progress);
+
+        if (complainter.webView.getParent() != null && complainter.webView.getParent() instanceof ViewGroup)
+            ((ViewGroup) complainter.webView.getParent()).removeView(complainter.webView);
+
         main.addView(complainter.webView);
         complainter.webView.setFocusable(false);
         complainter.webView.setClickable(false);
@@ -95,6 +102,9 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
                 }
             });
         }
+
+        if (!complainter.isLoading())
+            progressView.setAlpha(0);
     }
 
     @Override
@@ -108,6 +118,8 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     @Override
     public void onPageFinished(String url) {
+        progressView.animate().alpha(0).start();
+
         if (url.equals(Complainter.DONE_URL)) {
             new AlertDialog.Builder(this)
                     .setCancelable(false)
@@ -129,6 +141,10 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     @Override
     public void onProgressChanged(int progress) {
+        if (progressView.getAlpha() == 0)
+            progressView.animate().alpha(1).start();
+
+        progressView.update((float) progress / 100);
     }
 
     private void error(String message) {
@@ -146,23 +162,21 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Bla
 
     @Override
     public void onAlert(String message) {
-        if (isSubmitted) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(message)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            finish();
-                        }
-                    })
-                    .show();
-        } else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        finish();
+                    }
+                })
+                .show();
     }
 }
