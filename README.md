@@ -2,4 +2,4 @@ The Port Authority Feedback Reporter is a small application to make it easier fo
 
 |Input|Input|Preview|About (using [Attribouter](https://jfenn.me/about/?Attribouter)|
 |-----|-----|-----|-----|
-|![img](https://jfenn.me/images/screenshots/PAComplainter-Input.png?s=1)|![img](https://jfenn.me/images/screenshots/PAComplainter-Input2.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-Preview.png)|![img](https://jfenn.me/images/screenshots/PAComplainter-About.png)|
+|![img](./.github/images/input-1.png?raw=true)|![img](./.github/images/input-2.png?raw=true)|![img](./.github/images/preview.png?raw=true)|![img](./.github/images/about.png?raw=true)|
