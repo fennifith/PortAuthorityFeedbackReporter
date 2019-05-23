@@ -66,12 +66,12 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/first_name">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/firstName"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -79,52 +79,52 @@
                                         android:inputType="textPersonName|textCapWords"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/last_name">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/lastName"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="textPersonName|textCapWords"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/home_phone">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/phone"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="phone"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/email">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/email"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="textEmailAddress"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
 
@@ -149,35 +149,35 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/vehicle_number">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/vehicle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="number"
                                         android:maxLength="4" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/operator_number">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/operator"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="number"
                                         android:maxLength="4" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
 
@@ -210,35 +210,35 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/date">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/date"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="date"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/time">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/time"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:inputType="time"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
 
@@ -263,13 +263,13 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/route_number">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/route"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -277,15 +277,15 @@
                                         android:inputType="text"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:hint="@string/location">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/location"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                                         android:inputType="text"
                                         android:maxLines="1" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
                                 <FrameLayout
                                     android:layout_width="match_parent"
@@ -305,7 +305,7 @@
                                     android:paddingRight="8dp"
                                     android:paddingTop="4dp">
 
-                                    <android.support.v7.widget.AppCompatSpinner
+                                    <androidx.appcompat.widget.AppCompatSpinner
                                         android:id="@+id/direction"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content" />
@@ -349,27 +349,27 @@
                             android:paddingRight="8dp"
                             android:paddingTop="4dp">
 
-                            <android.support.v7.widget.AppCompatSpinner
+                            <androidx.appcompat.widget.AppCompatSpinner
                                 android:id="@+id/complaint"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
                         </FrameLayout>
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:hint="@string/description">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/description"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textMultiLine"
                                 android:maxLines="10" />
 
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
