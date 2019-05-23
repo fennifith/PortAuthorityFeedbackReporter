@@ -53,25 +53,10 @@
                         android:hint="@string/first_name">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/firstName"
+                            android:id="@+id/name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:inputType="textPersonName|textCapWords"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="@string/last_name">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/lastName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:inputType="textPersonName|textCapWords"
                             android:maxLines="1" />
 
@@ -205,6 +190,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
+                        android:hint="@string/vehicle_number">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/vehicle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="4" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
                         android:hint="@string/location">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -251,60 +251,6 @@
                     android:layout_marginTop="18dp"
                     android:padding="4dp"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_bus" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="@string/vehicle_number">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/vehicle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:maxLength="4" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="@string/operator_number">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/operator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:maxLength="4" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:padding="4dp"
-                    android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_message" />
 
                 <LinearLayout
@@ -328,6 +274,12 @@
                             android:layout_height="wrap_content" />
 
                     </FrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/ada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/field_ada_related" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"

@@ -8,25 +8,31 @@ import me.jfenn.pacomplaints.Complainter;
 
 public class InjectionTextWatcher implements TextWatcher {
 
-    private EditText editText;
+    private EditText[] editTexts;
     private String id;
     private String name;
     private int index;
 
-    public InjectionTextWatcher(EditText editText, String id) {
-        this.editText = editText;
+    public InjectionTextWatcher( String id, EditText... editTexts) {
+        this.editTexts = editTexts;
         this.id = id;
 
-        editText.addTextChangedListener(this);
+        for (EditText e : editTexts) {
+            e.addTextChangedListener(this);
+        }
+
         onTextChanged("", 0, 0, 0);
     }
 
-    public InjectionTextWatcher(EditText editText, String name, int index) {
-        this.editText = editText;
+    public InjectionTextWatcher(String name, int index, EditText... editTexts) {
+        this.editTexts = editTexts;
         this.name = name;
         this.index = index;
 
-        editText.addTextChangedListener(this);
+        for (EditText e : editTexts) {
+            e.addTextChangedListener(this);
+        }
+
         onTextChanged("", 0, 0, 0);
     }
 
@@ -36,10 +42,17 @@ public class InjectionTextWatcher implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        Complainter complainter = ((Complainter) editTexts[0].getContext().getApplicationContext());
+
+        String str = "";
+        for (EditText e : editTexts) {
+            str += " " + e.getText().toString();
+        }
+
         if (id != null)
-            ((Complainter) editText.getContext().getApplicationContext()).setAttribute(id, "value", "\"" + editText.getText().toString() + "\"");
+            complainter.setAttribute(id, "value", "\"" + str.substring(1) + "\"");
         else
-            ((Complainter) editText.getContext().getApplicationContext()).setAttributeByName(name, index, "value", "\"" + editText.getText().toString() + "\"");
+            complainter.setAttributeByName(name, index, "value", "\"" + str.substring(1) + "\"");
     }
 
     @Override

@@ -15,7 +15,7 @@ import me.jfenn.pacomplaints.Complainter;
 import me.jfenn.pacomplaints.R;
 import me.jfenn.pacomplaints.views.ProgressLineView;
 
-public class ReviewActivity extends AppCompatActivity implements Complainter.BlackboardListener {
+public class ReviewActivity extends AppCompatActivity implements Complainter.FeedbackListener {
 
     private Complainter complainter;
     private ViewGroup main;

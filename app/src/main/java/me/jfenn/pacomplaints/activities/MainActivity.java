@@ -33,15 +33,13 @@ import me.jfenn.pacomplaints.listeners.NoKeyboardFocusListener;
 import me.jfenn.pacomplaints.listeners.NoKeyboardTouchListener;
 import me.jfenn.pacomplaints.views.ProgressLineView;
 
-public class MainActivity extends AppCompatActivity implements Complainter.BlackboardListener {
+public class MainActivity extends AppCompatActivity implements Complainter.FeedbackListener {
 
-    private static final String PREF_NAME_FIRST = "firstName";
-    private static final String PREF_NAME_LAST = "lastName";
+    private static final String PREF_NAME = "firstName";
     private static final String PREF_PHONE = "phone";
     private static final String PREF_EMAIL = "email";
 
-    private TextInputEditText firstName;
-    private TextInputEditText lastName;
+    private TextInputEditText name;
     private TextInputEditText phone;
     private TextInputEditText email;
     private AppCompatSpinner complaint;
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
     private TextInputEditText location;
     private AppCompatSpinner direction;
     private TextInputEditText vehicle;
-    private TextInputEditText operator;
     private TextInputEditText description;
     private ProgressLineView progressView;
 
@@ -66,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         complainter.addListener(this);
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
+        name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         complaint = findViewById(R.id.complaint);
@@ -77,12 +73,10 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         location = findViewById(R.id.location);
         direction = findViewById(R.id.direction);
         vehicle = findViewById(R.id.vehicle);
-        operator = findViewById(R.id.operator);
         description = findViewById(R.id.description);
         progressView = findViewById(R.id.progress);
 
-        firstName.setText(prefs.getString(PREF_NAME_FIRST, ""));
-        lastName.setText(prefs.getString(PREF_NAME_LAST, ""));
+        name.setText(prefs.getString(PREF_NAME, ""));
         phone.setText(prefs.getString(PREF_PHONE, ""));
         email.setText(prefs.getString(PREF_EMAIL, ""));
 
@@ -90,7 +84,12 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         noon.set(Calendar.HOUR_OF_DAY, 12);
         Calendar now = Calendar.getInstance();
 
-        direction.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new String[]{"Inbound", "Outbound", "Not Applicable"}));
+        direction.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new OptionData[]{
+                new OptionData("Inbound", "Inbound"),
+                new OptionData("Outbound", "Outbound"),
+                new OptionData("Other", "Other"),
+                new OptionData("I don't know", "I don't know")
+        }));
         direction.setSelection(now.after(noon) ? 1 : 0);
 
         date.setText(new SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(now.getTime()));
@@ -145,26 +144,18 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         });
 
         complaint.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, new OptionData[]{
-                new OptionData("ADA/Accessibility", "ADA/Accessibility Complaint"),
-                new OptionData("Civil Rights/Title VI", "Civil Rights/Title VI Complaint"),
-                new OptionData("Company", "Company Complaint"),
-                new OptionData("Employee", "Employee Complaint"),
-                new OptionData("Other", "Miscellaneous Complaint"),
-                new OptionData("Service", "Service - General Complaint"),
-                new OptionData("ServiceLateEarly", "Service - Late/Early"),
-                new OptionData("ServiceNoShow", "Service - No Show"),
-                new OptionData("ServiceOvercrowding", "Service - Overcrowding"),
-                new OptionData("ServicePassup", "Service - Pass Up"),
-                new OptionData("ServiceServiceRequested", "Service - Service Requested"),
-                new OptionData("Website", "Website Complaint")
+                new OptionData("Question", "Question"),
+                new OptionData("Complaint", "Complaint"),
+                new OptionData("Suggestion", "Suggestion"),
+                new OptionData("Praise", "Praise"),
+                new OptionData("Other", "Other")
         }));
 
         findViewById(R.id.review).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 prefs.edit()
-                        .putString(PREF_NAME_FIRST, firstName.getText().toString())
-                        .putString(PREF_NAME_LAST, lastName.getText().toString())
+                        .putString(PREF_NAME, name.getText().toString())
                         .putString(PREF_PHONE, phone.getText().toString())
                         .putString(PREF_EMAIL, email.getText().toString())
                         .apply();
@@ -211,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                 route.setText("");
                 location.setText("");
                 vehicle.setText("");
-                operator.setText("");
                 description.setText("");
             }
 
@@ -225,27 +215,29 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
     public void onPageFinished(String url) {
         progressView.animate().alpha(0).start();
 
-        new InjectionTextWatcher(firstName, "firstname");
-        new InjectionTextWatcher(lastName, "lastname");
-        new InjectionTextWatcher(phone, "homephone");
-        new InjectionTextWatcher(email, "email");
-        new InjectionTextWatcher(route, "routenum");
-        new InjectionTextWatcher(date, "incident_date");
-        new InjectionTextWatcher(time, "boardtime");
-        new InjectionTextWatcher(location, "boardloc");
-        new InjectionTextWatcher(vehicle, "busnumber");
-        new InjectionTextWatcher(operator, "opnumber");
-        new InjectionTextWatcher(description, "txaMessage", 0);
+        new InjectionTextWatcher("09b8bada-079d-4cbb-9151-3b34e5b0f1ca", name);
+        new InjectionTextWatcher("914d71a9-02be-46e9-a16e-e2f74110a947", phone);
+        new InjectionTextWatcher("25691d51-213f-4814-8e56-b7e361f92df6", email);
+        new InjectionTextWatcher("37370ded-c9f3-4582-84b0-59f5163fa234", route);
+        new InjectionTextWatcher("d8afa4f3-3425-43bd-bbeb-1ce68c618687", date, time);
+        new InjectionTextWatcher("c593eba5-38f1-4145-b737-5c664448361a", location);
+        new InjectionTextWatcher("ad246e5d-40e5-483a-999e-9063432f110e", vehicle);
+        new InjectionTextWatcher("f76aafe7-c665-4015-b490-b1628242885d", description);
 
         AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 if (parent == direction) {
-                    complainter.setAttributeByName("optDirection", 0, "checked", String.valueOf(position == 0));
-                    complainter.setAttributeByName("optDirection", 1, "checked", String.valueOf(position == 1));
+                    if (parent.getSelectedItem() instanceof OptionData) {
+                        complainter.callFunctionByName("__field_3372", 0, "options[" + (position + 1) + "].setAttribute(\"selected\", \"selected\")", new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String value) {
+                            }
+                        });
+                    }
                 } else if (parent == complaint) {
                     if (parent.getSelectedItem() instanceof OptionData) {
-                        complainter.callFunctionByName("ddSubject", 0, "options[" + (position + 1) + "].setAttribute(\"selected\", \"selected\")", new ValueCallback<String>() {
+                        complainter.callFunctionByName("__field_972", 0, "options[" + (position + 1) + "].setAttribute(\"selected\", \"selected\")", new ValueCallback<String>() {
                             @Override
                             public void onReceiveValue(String value) {
                             }
@@ -264,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
         direction.setOnItemSelectedListener(listener);
         listener.onItemSelected(direction, null, direction.getSelectedItemPosition(), 0);
 
-        complainter.getHtmlContentByName("ddSubject", 0, new ValueCallback<String>() {
+        /*complainter.getHtmlContentByName("ddSubject", 0, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
                 if (value.length() > 2) {
@@ -283,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Black
                             .show();
                 }
             }
-        });
+        });*/
     }
 
     private void error(String message) {

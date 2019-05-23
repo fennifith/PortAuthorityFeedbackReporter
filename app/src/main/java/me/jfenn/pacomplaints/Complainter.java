@@ -17,13 +17,13 @@ import me.jfenn.pacomplaints.views.RestrictedWebView;
 
 public class Complainter extends Application {
 
-    public static final String BASE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgcomment.asp?t=con";
+    public static final String BASE_URL = "https://www.portauthority.org/services/Customer-Service/";
     public static final String CONFIRM_URL = "http://www.portauthority.org/paac/apps/webcomments/pgConfirm.asp?form=concern";
     public static final String DONE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgComment.asp?t=thankyou";
 
     public WebView webView;
 
-    private List<BlackboardListener> listeners;
+    private List<FeedbackListener> listeners;
 
     private boolean isLoading;
 
@@ -181,23 +181,23 @@ public class Complainter extends Application {
         webView.evaluateJavascript("(function(){return document.getElementsByClassName('" + name + "')[" + index + "]." + function + ";})();", callback);
     }
 
-    public void addListener(BlackboardListener listener) {
+    public void addListener(FeedbackListener listener) {
         listeners.add(listener);
     }
 
-    public void removeListener(BlackboardListener listener) {
+    public void removeListener(FeedbackListener listener) {
         listeners.remove(listener);
     }
 
     private void onPageFinished(String url) {
         isLoading = false;
-        for (BlackboardListener listener : listeners) {
+        for (FeedbackListener listener : listeners) {
             listener.onPageFinished(url);
         }
     }
 
     private void onRequest(String url) {
-        for (BlackboardListener listener : listeners) {
+        for (FeedbackListener listener : listeners) {
             listener.onRequest(url);
         }
     }
@@ -208,18 +208,18 @@ public class Complainter extends Application {
 
     private void onProgressChanged(int progress) {
         isLoading = true;
-        for (BlackboardListener listener : listeners) {
+        for (FeedbackListener listener : listeners) {
             listener.onProgressChanged(progress);
         }
     }
 
     private void onAlert(String message) {
-        for (BlackboardListener listener : listeners) {
+        for (FeedbackListener listener : listeners) {
             listener.onAlert(message);
         }
     }
 
-    public interface BlackboardListener {
+    public interface FeedbackListener {
         void onPageFinished(String url);
         void onRequest(String url);
 
