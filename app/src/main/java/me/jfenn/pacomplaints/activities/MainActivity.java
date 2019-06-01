@@ -265,11 +265,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Feedb
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_REVIEW && resultCode == ReviewActivity.RESULT_CLEAR) {
-            clearFields();
-            complainter.webView.loadUrl(Complainter.BASE_URL);
-
-            if (progressView != null)
-                progressView.animate().alpha(1).start();
+            finish();
         }
     }
 

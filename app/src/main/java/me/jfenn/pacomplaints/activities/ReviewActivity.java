@@ -79,6 +79,7 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Fee
                         complainter.callFunctionByName("submit", 0, "click()", new ValueCallback<String>() {
                             @Override
                             public void onReceiveValue(String value) {
+                                dialog.dismiss();
                                 findViewById(R.id.submit).setVisibility(View.GONE);
                                 findViewById(R.id.retry).setVisibility(View.VISIBLE);
                                 findViewById(R.id.done).setVisibility(View.VISIBLE);
