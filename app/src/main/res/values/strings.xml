@@ -22,4 +22,6 @@
     <string name="title_unknown_error">Unknown Error</string>
     <string name="msg_unknown_error">Something has gone wrong while attempting to interact with the form. This usually signifies that part of the form has been updated and that the app may no longer be compatible with it.   Error message:</string>
     <string name="field_ada_related">Is this ADA related?</string>
+    <string name="title_retry">Retry</string>
+    <string name="title_done">Done</string>
 </resources>

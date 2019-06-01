@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import com.google.android.material.textfield.TextInputEditText;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -21,7 +23,6 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import me.jfenn.attribouter.Attribouter;
@@ -34,6 +35,8 @@ import me.jfenn.pacomplaints.listeners.NoKeyboardTouchListener;
 import me.jfenn.pacomplaints.views.ProgressLineView;
 
 public class MainActivity extends AppCompatActivity implements Complainter.FeedbackListener {
+
+    private static final int REQUEST_REVIEW = 153;
 
     private static final String PREF_NAME = "firstName";
     private static final String PREF_PHONE = "phone";
@@ -160,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements Complainter.Feedb
                         .putString(PREF_EMAIL, email.getText().toString())
                         .apply();
 
-                startActivity(new Intent(MainActivity.this, ReviewActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, ReviewActivity.class), REQUEST_REVIEW);
             }
         });
 
@@ -182,30 +185,10 @@ public class MainActivity extends AppCompatActivity implements Complainter.Feedb
     @Override
     protected void onResume() {
         super.onResume();
-        if (complainter.webView.getUrl().equals(Complainter.CONFIRM_URL)) {
-            complainter.getAttributeByClassName("Button", 0, "value", new ValueCallback<String>() {
-                @Override
-                public void onReceiveValue(String value) {
-                    if (value.contains("Changes")) {
-                        complainter.callFunctionByClassName("Button", 0, "click()", new ValueCallback<String>() {
-                            @Override
-                            public void onReceiveValue(String value) {
-                            }
-                        });
-                    } else {
-                        error("Backwards navigation changes button not found.");
-                    }
-                }
-            });
-        } else if (!complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
-            if (complainter.webView.getUrl().equals(Complainter.DONE_URL)) {
-                route.setText("");
-                location.setText("");
-                vehicle.setText("");
-                description.setText("");
-            }
-
+        if (!complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
+            clearFields();
             complainter.webView.loadUrl(Complainter.BASE_URL);
+
             if (progressView != null)
                 progressView.animate().alpha(1).start();
         }
@@ -255,27 +238,13 @@ public class MainActivity extends AppCompatActivity implements Complainter.Feedb
         listener.onItemSelected(complaint, null, complaint.getSelectedItemPosition(), 0);
         direction.setOnItemSelectedListener(listener);
         listener.onItemSelected(direction, null, direction.getSelectedItemPosition(), 0);
+    }
 
-        /*complainter.getHtmlContentByName("ddSubject", 0, new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String value) {
-                if (value.length() > 2) {
-                    List<OptionData> options = OptionData.fromHTML(value);
-                    complaint.setAdapter(new ArrayAdapter<>(MainActivity.this, R.layout.support_simple_spinner_dropdown_item, options.toArray(new OptionData[options.size()])));
-                } else {
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("Scraping Error")
-                            .setMessage("The app has failed to scrape the complaint options from the website. Form editing may still work, but is not reliable.")
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
-                }
-            }
-        });*/
+    private void clearFields() {
+        route.setText("");
+        location.setText("");
+        vehicle.setText("");
+        description.setText("");
     }
 
     private void error(String message) {
@@ -289,6 +258,19 @@ public class MainActivity extends AppCompatActivity implements Complainter.Feedb
                     }
                 })
                 .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_REVIEW && resultCode == ReviewActivity.RESULT_CLEAR) {
+            clearFields();
+            complainter.webView.loadUrl(Complainter.BASE_URL);
+
+            if (progressView != null)
+                progressView.animate().alpha(1).start();
+        }
     }
 
     @Override

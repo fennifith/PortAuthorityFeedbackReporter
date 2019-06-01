@@ -17,9 +17,7 @@ import me.jfenn.pacomplaints.views.RestrictedWebView;
 
 public class Complainter extends Application {
 
-    public static final String BASE_URL = "https://www.portauthority.org/services/Customer-Service/";
-    public static final String CONFIRM_URL = "http://www.portauthority.org/paac/apps/webcomments/pgConfirm.asp?form=concern";
-    public static final String DONE_URL = "http://www.portauthority.org/paac/apps/webcomments/pgComment.asp?t=thankyou";
+    public static final String BASE_URL = "https://www.portauthority.org/contact/Customer-Service/";
 
     public WebView webView;
 

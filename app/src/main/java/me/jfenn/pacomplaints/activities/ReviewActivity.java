@@ -17,6 +17,9 @@ import me.jfenn.pacomplaints.views.ProgressLineView;
 
 public class ReviewActivity extends AppCompatActivity implements Complainter.FeedbackListener {
 
+    public static final int RESULT_CLEAR = 253;
+    public static final int RESULT_RETRY = 274;
+
     private Complainter complainter;
     private ViewGroup main;
 
@@ -39,6 +42,24 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Fee
         complainter.webView.setFocusable(false);
         complainter.webView.setClickable(false);
 
+        setResult(RESULT_RETRY);
+
+        findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_RETRY);
+                finish();
+            }
+        });
+
+        findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CLEAR);
+                finish();
+            }
+        });
+
         findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,18 +76,12 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Fee
                 content.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        complainter.getAttributeByClassName("Button", 1, "value", new ValueCallback<String>() {
+                        complainter.callFunctionByName("submit", 0, "click()", new ValueCallback<String>() {
                             @Override
                             public void onReceiveValue(String value) {
-                                if (value.contains("Submit")) {
-                                    complainter.callFunctionByClassName("Button", 1, "click()", new ValueCallback<String>() {
-                                        @Override
-                                        public void onReceiveValue(String value) {
-                                        }
-                                    });
-                                } else {
-                                    error("Second submit button not found.");
-                                }
+                                findViewById(R.id.submit).setVisibility(View.GONE);
+                                findViewById(R.id.retry).setVisibility(View.VISIBLE);
+                                findViewById(R.id.done).setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -76,23 +91,6 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Fee
                 dialog.show();
             }
         });
-
-        if (complainter.webView.getUrl().equals(Complainter.BASE_URL)) {
-            complainter.getAttributeByClassName("Button", 0, "value", new ValueCallback<String>() {
-                @Override
-                public void onReceiveValue(String value) {
-                    if (value.contains("Submit")) {
-                        complainter.callFunctionByClassName("Button", 0, "click()", new ValueCallback<String>() {
-                            @Override
-                            public void onReceiveValue(String value) {
-                            }
-                        });
-                    } else {
-                        error("First submit button not found.");
-                    }
-                }
-            });
-        }
 
         if (!complainter.isLoading())
             progressView.setAlpha(0);
@@ -111,24 +109,7 @@ public class ReviewActivity extends AppCompatActivity implements Complainter.Fee
     public void onPageFinished(String url) {
         progressView.animate().alpha(0).start();
 
-        if (url.equals(Complainter.DONE_URL)) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Form Submitted")
-                    .setMessage("The form has been submitted successfully. Press \'ok\' to close this page and reset all fields.")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            finish();
-                        }
-                    })
-                    .show();
-        } else if (!url.equals(Complainter.BASE_URL) && !url.equals(Complainter.CONFIRM_URL)) {
+        if (!url.equals(Complainter.BASE_URL)) {
             error("URL not recognized.");
         }
     }
